@@ -35,23 +35,18 @@ async function processData() {
             });
         }
 
-        let sortOrder = true;
-
         codeSort.addEventListener('click', () => {
-            sortOrder = !sortOrder;
-            result.sort((a, b) => sortOrder ? (a.code > b.code ? 1 : -1) : (a.code < b.code ? 1 : -1));
+            result.sort((a, b) => a.code > b.code ? 1 : -1);
             updateTable(result);
         });
 
         courseSort.addEventListener('click', () => {
-            sortOrder = !sortOrder;
-            result.sort((a, b) => sortOrder ? (a.coursename > b.coursename ? 1 : -1) : (a.coursename < b.coursename ? 1 : -1));
+            result.sort((a, b) => a.coursename > b.coursename ? 1 : -1);
             updateTable(result);
         });
 
         progressionSort.addEventListener('click', () => {
-            sortOrder = !sortOrder;
-            result.sort((a, b) => sortOrder ? (a.progression > b.progression ? 1 : -1) : (a.progression < b.progression ? 1 : -1));
+            result.sort((a, b) => a.progression > b.progression ? 1 : -1);
             updateTable(result);
         });
 
