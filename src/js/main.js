@@ -21,8 +21,6 @@ async function processData() {
         const courseSort = document.getElementById('courseHeader');
         const progressionSort = document.getElementById('progressionHeader');
 
-        let sortOrder = true;
-
         function updateTable(data) {
             tableBody.innerHTML = '';
             data.forEach(item => {
@@ -36,6 +34,8 @@ async function processData() {
                 tableBody.innerHTML += newRow;
             });
         }
+
+        let sortOrder = true;
 
         codeSort.addEventListener('click', () => {
             sortOrder = !sortOrder;
