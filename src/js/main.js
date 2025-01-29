@@ -17,24 +17,47 @@ async function processData() {
 
         const tableBody = document.getElementById('tableBody');
         const searchInput = document.getElementById('search');
+        const codeSort = document.getElementById('codeHeader');
+        const courseSort = document.getElementById('courseHeader');
+        const progressionSort = document.getElementById('progressionHeader');
+
+        let sortOrder = true;
 
         function updateTable(data) {
             tableBody.innerHTML = '';
-        data.forEach(item => {
-            const newRow = `
+            data.forEach(item => {
+                const newRow = `
             <tr>
             <td>${item.code}</td>
             <td>${item.coursename}</td>
             <td>${item.progression}</td>
             </tr>
             `;
-            tableBody.innerHTML += newRow;
+                tableBody.innerHTML += newRow;
+            });
+        }
+
+        codeSort.addEventListener('click', () => {
+            sortOrder = !sortOrder;
+            result.sort((a, b) => sortOrder ? (a.code > b.code ? 1 : -1) : (a.code < b.code ? 1 : -1));
+            updateTable(result);
         });
-    }
+
+        courseSort.addEventListener('click', () => {
+            sortOrder = !sortOrder;
+            result.sort((a, b) => sortOrder ? (a.coursename > b.coursename ? 1 : -1) : (a.coursename < b.coursename ? 1 : -1));
+            updateTable(result);
+        });
+
+        progressionSort.addEventListener('click', () => {
+            sortOrder = !sortOrder;
+            result.sort((a, b) => sortOrder ? (a.progression > b.progression ? 1 : -1) : (a.progression < b.progression ? 1 : -1));
+            updateTable(result);
+        });
 
         searchInput.addEventListener('input', () => {
             const searchWord = searchInput.value.toLowerCase();
-            const filteredData = result.filter (item =>
+            const filteredData = result.filter(item =>
                 item.code.toLowerCase().includes(searchWord) ||
                 item.coursename.toLowerCase().includes(searchWord)
             );
@@ -48,3 +71,4 @@ async function processData() {
 }
 
 processData();
+
