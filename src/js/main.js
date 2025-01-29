@@ -16,9 +16,11 @@ async function processData() {
         const result = await fetchData();
 
         const tableBody = document.getElementById('tableBody');
-        tableBody.innerHTML = '';
+        const searchInput = document.getElementById('search');
 
-        result.forEach (item => {
+        function updateTable(data) {
+            tableBody.innerHTML = '';
+        data.forEach(item => {
             const newRow = `
             <tr>
             <td>${item.code}</td>
@@ -28,6 +30,18 @@ async function processData() {
             `;
             tableBody.innerHTML += newRow;
         });
+    }
+
+        searchInput.addEventListener('input', () => {
+            const searchWord = searchInput.value.toLowerCase();
+            const filteredData = result.filter (item =>
+                item.code.toLowerCase().includes(searchWord) ||
+                item.coursename.toLowerCase().includes(searchWord)
+            );
+            updateTable(filteredData);
+        });
+        updateTable(result);
+
     } catch (error) {
         console.error('Process error:', error);
     }
